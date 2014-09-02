@@ -21,10 +21,10 @@ std::stringstream e2(numbers);
 e2>>res;
 std::cout<<Palin.reverseString(str1)<<" ";
 if (Palin.isPalindrome(str1)==1){
-    std::cout<<"Yes"<<' ';
+    std::cout<<"yes"<<' ';
 }
 else{
-    std::cout<<"No"<<' ';
+    std::cout<<"no"<<' ';
 }
 
 for (int j=0; j<numbers.length();j++){
