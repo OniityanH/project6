@@ -13,7 +13,6 @@ int i;
 std::string input_value;
 std::string str1;
 std::string numbers;
-std::cout<<"enter your value string and number:"<<std::endl;
 getline(std::cin,input_value);
 std::istringstream e1(input_value);
 getline(e1,str1,' ');
