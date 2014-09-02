@@ -1,8 +1,5 @@
 #include "Palindrome.h"
-#include "Palindrome.cpp"
 #include "Fibonacci.h"
-#include "Fibonacci.cpp"
-#include "EfficientFibonacci.cpp"
 #include "EfficientFibonacci.h"
 #include <iostream>
 #include <string>
