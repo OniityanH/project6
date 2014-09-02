@@ -1,6 +1,6 @@
 #include "Fibonacci.h"
 
-int n_Fibonacci(int n)
+int Fibonacci::n_Fibonacci(int n)
 {
      if(n==1||n==2)
         return 1;

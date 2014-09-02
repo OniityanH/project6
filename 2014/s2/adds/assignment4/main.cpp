@@ -1,5 +1,8 @@
 #include "Palindrome.h"
+#include "Palindrome.cpp"
 #include "Fibonacci.h"
+#include "Fibonacci.cpp"
+#include "EfficientFibonacci.cpp"
 #include "EfficientFibonacci.h"
 #include <iostream>
 #include <string>
@@ -13,21 +16,19 @@ int i;
 std::string input_value;
 std::string str1;
 std::string numbers;
-std::cout<<"enter your value:"<<std::endl;
+std::cout<<"enter your value string and number:"<<std::endl;
 getline(std::cin,input_value);
 std::istringstream e1(input_value);
-std::cout<<"enter your string "<<std::endl;
 getline(e1,str1,' ');
-std::cout<<"enter your number"<<std::endl;
 getline(e1,numbers,' ');
 std::stringstream e2(numbers);
 e2>>res;
-std::cout<<Palin.reverseString(str1)<<"   ";
+std::cout<<Palin.reverseString(str1)<<" ";
 if (Palin.isPalindrome(str1)==1){
-    std::cout<<"Yes"<<std::endl;
+    std::cout<<"Yes"<<' ';
 }
 else{
-    std::cout<<"No"<<std::endl;
+    std::cout<<"No"<<' ';
 }
 
 for (int j=0; j<numbers.length();j++){
