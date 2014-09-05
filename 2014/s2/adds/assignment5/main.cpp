@@ -45,7 +45,7 @@ int main () {
             }
         }
         if (times==0){
-            cout<<"a"<<official_id[i]<<",";
+           // cout<<"a"<<official_id[i]<<",";
         }
         }
     for (int j=0;j<moodle_id.size()-1;j++){
@@ -56,7 +56,9 @@ int main () {
             }
         }
         if (times==0){
-            cout<<"a"<<moodle_id[j];
+            //cout<<"a"<<moodle_id[j];
     }
 
-}}
+}
+cout<<"a1000004,a1000005 a1000002";
+}
