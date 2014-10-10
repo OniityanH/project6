@@ -1,148 +1,106 @@
 #include <iostream>
-#include <vector>
+#include <string>
 #include <sstream>
+#include <vector>
+#include <cstdlib>
 #include <stdlib.h>
 using namespace std;
-
-class Sort{
+class Sort{										//sort class
 public:
-    vector <int> sorting;
-    void pushback(int k);
-    int getlength();
-    int *arra;
-    void vector_to_array();
-    int return_num(int);
+    int data[];									//array, each element is number of input
+    int temp;									//template number, swap numbers when sorting
+    int length;                                 //the length od the data[] array
 };
 
-void Sort::pushback(int k){
-    sorting.push_back(k);
-}
-
-int Sort::getlength(){
-    int l=sorting.size();
-    return l;
-}
-
-void Sort::vector_to_array(){
-    arra=&sorting[0];
-}
-
-int Sort::return_num(int k){
-    return sorting[k];
-}
-
-
-class BubbleSort: public Sort{
+class BubbleSort: public Sort{                  //Bubblesort class, child class of the sort
 public:
-    void bubble_sort();
-    void print();
-};
-
-void BubbleSort::bubble_sort(){
-    int length = sorting.size();
-    int temp = 0;
-    for(int i=0;i<length-1;i++){
-        for(int j=0;j<length-1;j++){
-            if(sorting[j]>sorting[j+1]){
-                temp = sorting[j+1];
-                sorting[j+1] = sorting[j];
-                sorting[j] = temp;
+    void bubble(){                              //bubble function
+	int i,j;                                    //I use two for loop to swap the element of
+    for(i=length-1;i>0;i++){                        //of the array, if left is less than right
+        for(j=0;j<i-1;j++){                         //swap the 2 numbers and go to next loop
+            if (data[j]>data[j+1]){                 //until i equal length-1
+                temp=data[j];
+                data[j]=data[j+1];
+                data[j+1]=temp;
             }
         }
     }
-}
-
-void BubbleSort::print(){
-    int length = sorting.size();
-    for(int i=0;i<length-1;i++){
-        cout<<sorting[i]<<' ';
-    }
-    cout<<sorting[length-1];
-}
-
-
-class QuickSort: public Sort{
-public:
-    void quick_sort(int[],int,int);
+	}
 };
 
+class QuickSort: public Sort{                   //quick sort class, the child class of sort
+public:
+    void Qsort(int a[],int low,int high){       //I set 3 input elements array a[] and the 1st
+        if(low>=high){                              //element and 2nd element
+            return;
+        }
+        int first=low;
+        int last=high;
+        int key=a[first];
+        while(first<last){
+            while(first<last&&a[last]>=key)
+            --last;
+            a[first]=a[last];
+            while(first<last&&a[first]<=key)
+            ++first;
+            a[last]=a[first];
+        }
+        a[first]=key;
+        Qsort(a,low,first-1);
+        Qsort(a,first+1,high);
+}
+};
 
-void QuickSort::quick_sort(int arr[], int left,int right){
-    int i=left, j=right;
-    int temp;
-    int mid=(left+right)/2;
-    int pivot = arr[mid];
-
-    while (i<=j){
-        while(arr[i]<pivot){
-            i++;}
-        while(arr[j]>pivot){
-            j--;}
-        if(i<=j){
-            temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
-            i++;
-            j--;
+class RecursiveBinarySearch{                        // binary search class
+public:
+    int Search(int b[],int left,int right,int key){ // binary search function
+        if(left>right){                             // the first principle simila with
+            cout<<"false"<<" ";                         //quick sort because they all
+            return 0;                                   //use recursion. first we need to
+        }                                               //set the output of the function
+        else{
+            int middle=(left+right)/2;
+            if (b[middle]==0){
+                cout<<"true"<<" ";
+                return 0;
+            }
+            else if(0<b[middle]){
+            right=middle-1;
+            return Search(b,left,right,key);
+            }
+            else{
+            left=middle+1;
+            return Search(b,left,right,key);
+            }
         }
     }
-
-    if (left<j){
-        quick_sort(arr,left,j);
-    }
-    if (i<right){
-        quick_sort(arr,i,right);
-    }
-}
-
-class RecursiveBinarySearch: public QuickSort{
-public:
-    int RBsearch(int[],int,int,int);
 };
 
-
-int RecursiveBinarySearch::RBsearch(int ar[],int left,int right,int num){
-    int index=(left+right)/2;
-    int pivot = ar[index];
-    if(pivot==num){
-        return index;
-    }
-    if(pivot<num){
-        RBsearch(ar,index+1,right,num);
-    }
-    if(pivot>num){
-        RBsearch(ar,left,index-1,num);
-    }
-}
-
-int main(){
-    RecursiveBinarySearch b;
+int main()
+{
     string input;
-    int value;
+    int space=1;
     getline(cin,input);
-    istringstream ss(input);
-    string token;
-    while(getline(ss,token,' ')){
-        value=atoi(token.c_str());
-        b.pushback(value);
+    istringstream str1(input);
+    for(int i=0;i<input.length();i++){
+        if (input[i]==' '){
+            space++;
+        }
     }
-    b.vector_to_array();
-    int length = b.getlength();
-    int s_arr[length];
-    for(int i=0;i<length;i++){
-        s_arr[i]=b.return_num(i);
+    int numbers[space];
+    string array_string[space];
+    for(int j=0;j<space;j++){
+        str1>>array_string[j];
+        numbers[j]=(atoi(array_string[j].c_str()));
     }
-    b.quick_sort(s_arr,0,length-1);
-    if(b.RBsearch(s_arr,0,length-1,0)){
-        cout<<"true ";
-    }
-    else{
-        cout<<"false ";
-    }
-    for(int i=0;i<length;i++){
-        cout<<s_arr[i]<<' ';
-    }
-    cout<<endl;
-    return 0;
+    QuickSort case1;
+    case1.Qsort(numbers,0,sizeof(numbers)/sizeof(numbers[0])-1);
 
+    RecursiveBinarySearch case2;
+    case2.Search(numbers,0,sizeof(numbers)/sizeof(numbers[0])-1,0);
+
+    for(int i=0;i<sizeof(numbers)/sizeof(numbers[0]);i++){
+    cout<<numbers[i]<<" ";
+    }
+    return 0;
 }
